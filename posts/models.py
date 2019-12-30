@@ -21,7 +21,7 @@ class Post(models.Model):
         return "/posts/{}/update/".format(self.slug)
 
     def get_delete_url(self):
-        return "/posts/{}/delete".format(self.slug)
+        return "/posts/{}/delete/".format(self.slug)
 
 class Author(models.Model):
     user=models.ForeignKey(User,on_delete = models.CASCADE)
