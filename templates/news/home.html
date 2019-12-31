@@ -1,21 +1,35 @@
 {% extends "main.html" %}
 {% block content %}
+<div class='jumbotron'>
 <h1>Welcome to your Dashboard </h1>
 <hr>
 <hr>
-<form method="POST" action = "/news/scrape/">
+<p>{% if hide %}Your next scrape is in {{ next_scrape }} hours.</p>
+{% else %}
+<form method="POST" action = "{% url 'news:scrape' %}">
 {% csrf_token %}
 <button type="submit" class= "btn btn-primary">Get Morning News</button>
 </form>
+{% endif %}
+</div>
 <hr>
-<ul>
+<div class="container">
+<div class="row">
+<div class="col-sm-3 text-center">
+
 {% for news in headlines %}
-    <li>
-    {{ news.image }}
-    {{ news.title }}  <a href="{{ note.url }}">Details</a>  
-    </li>
-</ul>
+    <div class="card text-center" style="width: 100%;">
+    <div class="card-body">
+
+    <img class="card-img-top" src="{{ news.image }}">
+    <h5 class="card-title><a href="{{ news.url }}">{{ news.title }}</a></h5>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+</div>
  <hr>
-{% endfor %}
+
 
 {% endblock content %}

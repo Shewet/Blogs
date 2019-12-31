@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 import requests
 import os
 import shutil
+import math
 from django.conf import settings
 requests.packages.urllib3.disable_warnings()
 # Create your views here.
@@ -11,9 +12,22 @@ from datetime import timedelta, timezone, datetime
 
 
 def news_list(request):
+    #User can scrape only once in 24 hours
+    user_p=UserProfile.objects.filter(user=request.user).first()
+    now=datetime.now(timezone.utc)
+    time_diff=now-user_p.last_scrape
+    diff_in_hrs=time_diff/timedelta(minutes=60)
+    next_scrape=-1
+    if diff_in_hrs<24:
+        hide=True
+        next_scrape=math.ceil(24-diff_in_hrs)
+    else:
+        hide=False
     headlines=Headline.objects.all()
     context={
-        'headlines':headlines
+        'headlines':headlines,
+        'hide':hide,
+        'next_scrape':next_scrape
     }
     return render(request,'news/home.html',context)
 
@@ -53,7 +67,7 @@ def scrape(request):
             headline.save()
         else:
             pass
-        return redirect('/news/home')
+    return redirect('/news/home')
 
 
 
