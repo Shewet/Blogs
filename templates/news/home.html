@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block content %}
+<h1>Welcome to your Dashboard </h1>
+<hr>
+<hr>
+<form method="POST" action = "/news/scrape/">
+{% csrf_token %}
+<button type="submit" class= "btn btn-primary">Get Morning News</button>
+</form>
+<hr>
+<ul>
+{% for news in headlines %}
+    <li>
+    {{ news.image }}
+    {{ news.title }}  <a href="{{ note.url }}">Details</a>  
+    </li>
+</ul>
+ <hr>
+{% endfor %}
+
+{% endblock content %}

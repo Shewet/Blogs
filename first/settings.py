@@ -14,7 +14,6 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -38,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts.apps.PostsConfig',
-    'notepad.apps.NotepadConfig'
+    'notepad.apps.NotepadConfig',
+    'news.apps.NewsConfig',
 ]
 
 MIDDLEWARE = [
@@ -124,10 +124,7 @@ STATICFILES_DIR =[
     os.path.join(BASE_DIR,'static_in_env'),
     ]
 VENV_PATH = os.path.dirname(BASE_DIR)
-print(VENV_PATH)
 STATIC_ROOT = os.path.join(BASE_DIR,'static_root')
-print(STATIC_ROOT)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
-print(MEDIA_ROOT)
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
