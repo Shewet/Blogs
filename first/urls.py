@@ -7,7 +7,7 @@ from posts.views import posts_list,post_detail,post_create,post_update,post_dele
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('posts/',posts_list),
+    path('posts/',posts_list, name='posts_list'),
     path('posts/create/',post_create),
     path('posts/<slug:slug>/',post_detail),
     path('posts/<slug:slug>/update/',post_update),
